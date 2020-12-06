@@ -20,10 +20,7 @@ import Details from './pages/Details';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
   
-
-
 class App extends React.Component {
-
 
     render() {
 
@@ -45,8 +42,6 @@ class App extends React.Component {
             </>
         );
     }
-
-
 }
 export default App;
 
