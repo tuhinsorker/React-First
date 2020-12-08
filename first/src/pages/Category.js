@@ -1,16 +1,61 @@
 import React from 'react';
+import axios from 'axios';
 
 class Category extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {};
+    constructor() {
+        super();
+        this.state = {
+            newsList:[],
+            cat_slug:'international'
+        };
     }
 
+    componentDidMount(){
+
+        axios.get(`http://localhost/nationnews24/app/newslist_by_category?cat_slug=${this.state.cat_slug}`)
+        .then(res=>{
+            this.setState({newsList:res.data})
+            console.log(res);
+        })
+        .catch(error=>{
+            console.log(error)
+        })
+      
+    }
+
+   
+
     render() {
+
+        const mylist = this.state.newsList;
+        const cname = mylist.map((mylist)=>{
+            return(
+                <>
+                    <div class="post-style2 wow fadeIn" data-wow-duration="1s">
+                        <a href="#"><img src={mylist.image_thumb} alt=""/></a>
+                        <div class="post-style2-detail">
+                            <h3><a href="#" title="">{mylist.title}</a></h3>
+                            <div class="date">
+                                <ul>
+                                    <li><img src={mylist.post_by_photo} class="img-responsive" alt=""/></li>
+                                    <li>By <a title="" href="#"><span>{mylist.post_by_name}</span></a> --</li>
+                                    <li><a title="" href="#">{mylist.post_date}</a> --</li>
+                                </ul>
+                            </div>
+                            <p>{mylist.short_news}</p>
+                            <button type="button" class="btn btn-style">Reade more</button>
+                        </div>
+                    </div>
+                </>
+           
+
+            )
+        })
+
+        
         return (
             <>
-
                     
         <section class="block-inner">
             <div class="container">
@@ -30,86 +75,9 @@ class Category extends React.Component {
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 theiaContent">
-                    <div class="post-style2 wow fadeIn" data-wow-duration="1s">
-                        <a href="#"><img src="assets/images/category/category-post-11.jpg" alt=""/></a>
-                        <div class="post-style2-detail">
-                            <h3><a href="#" title="">It uses a dictionary of over 200 Latin words, combined with</a></h3>
-                            <div class="date">
-                                <ul>
-                                    <li><img src="assets/images/comment-01.jpg" class="img-responsive" alt=""/></li>
-                                    <li>By <a title="" href="#"><span>Naeem Khan</span></a> --</li>
-                                    <li><a title="" href="#">11 Nov 2015</a> --</li>
-                                    <li><a title="" href="#"><span>275 Comments</span></a></li>
-                                </ul>
-                            </div>
-                            <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh.</p>
-                            <button type="button" class="btn btn-style">Reade more</button>
-                        </div>
-                    </div>
-                    <div class="post-style2 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
-                        <a href="#"><img src="assets/images/category/category-post-12.jpg" alt=""/></a>
-                        <div class="post-style2-detail">
-                            <h3><a href="#" title="">Lorem Ipsum is simply dummy text of the printing .</a></h3>
-                            <div class="date">
-                                <ul>
-                                    <li><img src="assets/images/comment-02.jpg" class="img-responsive" alt=""/></li>
-                                    <li>By <a title="" href="#"><span>Naeem Khan</span></a> --</li>
-                                    <li><a title="" href="#">11 Nov 2015</a> --</li>
-                                    <li><a title="" href="#"><span>275 Comments</span></a></li>
-                                </ul>
-                            </div>
-                            <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh.</p>
-                            <button type="button" class="btn btn-style">Reade more</button>
-                        </div>
-                    </div>
-                    <div class="post-style2 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
-                        <a href="#"><img src="assets/images/category/category-post-13.jpg" alt=""/></a>
-                        <div class="post-style2-detail">
-                            <h3><a href="#" title="">If you are going to use a passage of Lorem Ipsum .</a></h3>
-                            <div class="date">
-                                <ul>
-                                    <li><img src="assets/images/comment-01.jpg" class="img-responsive" alt=""/></li>
-                                    <li>By <a title="" href="#"><span>Naeem Khan</span></a> --</li>
-                                    <li><a title="" href="#">11 Nov 2015</a> --</li>
-                                    <li><a title="" href="#"><span>275 Comments</span></a></li>
-                                </ul>
-                            </div>
-                            <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh.</p>
-                            <button type="button" class="btn btn-style">Reade more</button>
-                        </div>
-                    </div>
-                    <div class="post-style2 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s">
-                        <a href="#"><img src="assets/images/category/category-post-14.jpg" alt=""/></a>
-                        <div class="post-style2-detail">
-                            <h3><a href="#" title="">Check Out the Amazing Photos of Lauren Conradâ€™s Trip</a></h3>
-                            <div class="date">
-                                <ul>
-                                    <li><img src="assets/images/comment-02.jpg" class="img-responsive" alt=""/></li>
-                                    <li>By <a title="" href="#"><span>Naeem Khan</span></a> --</li>
-                                    <li><a title="" href="#">11 Nov 2015</a> --</li>
-                                    <li><a title="" href="#"><span>275 Comments</span></a></li>
-                                </ul>
-                            </div>
-                            <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh.</p>
-                            <button type="button" class="btn btn-style">Reade more</button>
-                        </div>
-                    </div>
-                    <div class="post-style2 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s">
-                        <a href="#"><img src="assets/images/category/category-post-15.jpg" alt=""/></a>
-                        <div class="post-style2-detail">
-                            <h3><a href="#" title="">Many desktop publishing packages and web page.</a></h3>
-                            <div class="date">
-                                <ul>
-                                    <li><img src="assets/images/comment-01.jpg" class="img-responsive" alt=""/></li>
-                                    <li>By <a title="" href="#"><span>Naeem Khan</span></a> --</li>
-                                    <li><a title="" href="#">11 Nov 2015</a> --</li>
-                                    <li><a title="" href="#"><span>275 Comments</span></a></li>
-                                </ul>
-                            </div>
-                            <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh.</p>
-                            <button type="button" class="btn btn-style">Reade more</button>
-                        </div>
-                    </div>
+
+                    {cname}
+                   
                 </div>
                 <aside class="col-sm-4 left-padding rightSidebar">
                     <div class="input-group search-area">
